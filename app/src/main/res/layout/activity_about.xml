@@ -1,0 +1,112 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frame_layout__about"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/app_about_title"
+            android:textAppearance="@android:style/TextAppearance.Material.Display1"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/textView3_Version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView_Title"
+            android:layout_alignStart="@+id/textView_Title"
+            android:layout_below="@+id/textView_Title"
+            android:layout_marginTop="38dp"
+            android:text="@string/app_about_version"
+            android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView3_Version"
+            android:layout_alignStart="@+id/textView3_Version"
+            android:layout_below="@+id/textView3_Version"
+            android:layout_marginTop="2dp"
+            android:text="@string/app_about_version_string"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/textView_info_about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_about_text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:layout_below="@+id/textView4"
+            android:layout_alignStart="@+id/textView4"
+            android:layout_marginTop="16dp"
+            android:layout_alignEnd="@+id/textView8" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textView_info_about"
+            android:layout_alignLeft="@+id/textView_info_about"
+            android:layout_alignRight="@+id/textView_info_about"
+            android:layout_alignStart="@+id/textView_info_about"
+            android:layout_below="@+id/textView_info_about"
+            android:layout_marginTop="35dp"
+            android:elegantTextHeight="false"
+            android:fontFamily="sans-seif-thin"
+            android:longClickable="false"
+            android:singleLine="false"
+            android:text="@string/app_about_open_source_text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/textView7_Licenses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView6"
+            android:layout_below="@+id/textView6"
+            android:layout_marginTop="17dp"
+            android:onClick="showLicensesDialog"
+            android:text="@string/licenses_text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textView_Title"
+            android:layout_alignRight="@+id/textView_Title"
+            android:layout_below="@+id/textView_Title"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="-4dp"
+            android:text="@string/beta_text"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@android:color/transparent"
+            android:textStyle="italic" />
+
+
+    </RelativeLayout>
+
+</FrameLayout>

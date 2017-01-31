@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="licensesdialog-1.8.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/cac0ba811f1ab031cb72892e8721594a0f5ce40d/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/cac0ba811f1ab031cb72892e8721594a0f5ce40d/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.psdev.licensesdialog/licensesdialog/1.8.0/ca6cef6148e223e35dff5d22bd16c6cf54c61d08/licensesdialog-1.8.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/show_setup_instructions"
+        android:title="@string/main_menu_setup_item_text" />
+    <item
+        android:id="@+id/show_default_apps"
+        android:title="@string/main_menu_default_apps_item_text" />
+    <item
+        android:id="@+id/show_whitelist"
+        android:title="@string/main_menu_whitelist_item_text" />
+    <item
+        android:id="@+id/about_app"
+        android:title="@string/main_menu_about_item_text"
+        app:showAsAction="never" />
+</menu>
