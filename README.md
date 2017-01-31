@@ -1,5 +1,5 @@
 # ScanLinks
-ScanLinks - Block unsafe/dangerous links on your Android phone!
+ScanLinks - Block unsafe/dangerous links on your Android device!
 
 ## What is ScanLinks?
 
@@ -23,7 +23,7 @@ PS: If your device does not show you a dialog box to handle the link, you can go
 
 ## Download
 
-Play Store: 
+Play Store: https://play.google.com/store/apps/details?id=com.ssrij.urlcheck
 
 ### Compile & Run Requirements
 * 5.0 (Lollipop) SDK platform
