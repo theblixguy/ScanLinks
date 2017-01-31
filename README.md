@@ -1,3 +1,5 @@
+[![Platform (Android)](https://img.shields.io/badge/platform-Android-blue.svg?style=flat-square)](http://www.android.com) [![License](https://img.shields.io/badge/license-GPLv3-blue.svg?style=flat)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
 # ScanLinks
 ScanLinks - Block unsafe/dangerous links on your Android device!
 
