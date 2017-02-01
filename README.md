@@ -27,6 +27,10 @@ PS: If your device does not show you a dialog box to handle the link, you can go
 
 Play Store: https://play.google.com/store/apps/details?id=com.ssrij.urlcheck
 
+## Privacy Policy
+
+You can find it here: http://suyashsrijan.com/scanlinks/privacy/
+
 ### Compile & Run Requirements
 * 5.0 (Lollipop) SDK platform
 * Android smartphone running at least 5.0 (Lollipop)
