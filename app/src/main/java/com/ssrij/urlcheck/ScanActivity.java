@@ -1,5 +1,6 @@
 package com.ssrij.urlcheck;
 
+import android.content.ComponentName;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -38,6 +39,7 @@ public class ScanActivity extends AppCompatActivity {
     private ScanURLAPI myAPI;
     private MaterialDialog progressDialog;
     private Intent browserIntent;
+    private ComponentName browserCompName;
     private String virusTotalUrl = "";
     private boolean blockWithoutDiag = false;
     private boolean ignoreNotInDbWarning = false;
@@ -48,6 +50,7 @@ public class ScanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         urlToCheck = getIntent().getDataString();
+        browserIntent = new Intent();
 
         new Prefs.Builder()
                 .setContext(this)
@@ -73,24 +76,19 @@ public class ScanActivity extends AppCompatActivity {
 
         for (ResolveInfo info : list) {
             if (info.activityInfo.applicationInfo.loadLabel(packageManager).toString().equals(Prefs.getString("browserName", "Chrome"))) {
-                browserIntent = getPackageManager().getLaunchIntentForPackage(info.activityInfo.applicationInfo.packageName);
+                browserCompName = new ComponentName(info.activityInfo.packageName, info.activityInfo.name);
+                browserIntent.setComponent(browserCompName);
             }
         }
 
         for (String url : whitelistArray) {
             if (urlToCheck.contains(url)) {
-                browserIntent.setAction(Intent.ACTION_VIEW);
-                browserIntent.setData(Uri.parse(urlToCheck));
-                startActivity(browserIntent);
-                finish();
+                launchURLInBrowser();
             }
         }
 
         if (Prefs.getBoolean("suppressWarnings", false)) {
-            browserIntent.setAction(Intent.ACTION_VIEW);
-            browserIntent.setData(Uri.parse(urlToCheck));
-            startActivity(browserIntent);
-            finish();
+            launchURLInBrowser();
         }
 
         if (Prefs.getBoolean("blockWithoutDialog", false)) {
@@ -108,6 +106,15 @@ public class ScanActivity extends AppCompatActivity {
         showProgressDialog();
         getScanIDAndExecuteScan();
 
+    }
+
+    public void launchURLInBrowser() {
+        browserIntent.setAction(Intent.ACTION_VIEW);
+        browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        browserIntent.setComponent(browserCompName);
+        browserIntent.setData(Uri.parse(urlToCheck));
+        startActivity(browserIntent);
+        finish();
     }
 
     public void getScanIDAndExecuteScan() {
@@ -170,25 +177,16 @@ public class ScanActivity extends AppCompatActivity {
                                 }, Toast.LENGTH_SHORT);
                             }
                         } else {
-                            browserIntent.setAction(Intent.ACTION_VIEW);
-                            browserIntent.setData(Uri.parse(urlToCheck));
-                            startActivity(browserIntent);
-                            finish();
+                            launchURLInBrowser();
                         }
                     } else if (response.body() instanceof String) {
                         if (!ignoreNotInDbWarning) {
                             showURLBeingAnalyzedDialog();
                         } else {
-                            browserIntent.setAction(Intent.ACTION_VIEW);
-                            browserIntent.setData(Uri.parse(urlToCheck));
-                            startActivity(browserIntent);
-                            finish();
+                            launchURLInBrowser();
                         }
                     } else {
-                        browserIntent.setAction(Intent.ACTION_VIEW);
-                        browserIntent.setData(Uri.parse(urlToCheck));
-                        startActivity(browserIntent);
-                        finish();
+                        launchURLInBrowser();
                     }
                 } else {
                     hideProgressDialog();
@@ -228,14 +226,13 @@ public class ScanActivity extends AppCompatActivity {
                 .content(getString(R.string.scan_unavail_dialog_text))
                 .positiveText(getString(R.string.scan_unavail_dialog_positive_button))
                 .negativeText(getString(R.string.scan_unavail_dialog_negative_button))
+                .cancelable(false)
+                .autoDismiss(false)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         dialog.dismiss();
-                        browserIntent.setAction(Intent.ACTION_VIEW);
-                        browserIntent.setData(Uri.parse(urlToCheck));
-                        startActivity(browserIntent);
-                        finish();
+                        launchURLInBrowser();
                     }
                 })
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
@@ -255,6 +252,9 @@ public class ScanActivity extends AppCompatActivity {
                 .content(getString(R.string.url_not_in_db_dialog_text))
                 .positiveText(getString(R.string.url_not_in_db_dialog_positive_button))
                 .negativeText(getString(R.string.url_not_in_db_dialog_negative_button))
+                .neutralText(R.string.url_not_in_db_neutral_text)
+                .autoDismiss(false)
+                .cancelable(false)
                 .backgroundColor(Color.parseColor("#FDD835"))
                 .positiveColor(Color.WHITE)
                 .negativeColor(Color.WHITE)
@@ -265,10 +265,7 @@ public class ScanActivity extends AppCompatActivity {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         dialog.dismiss();
-                        browserIntent.setAction(Intent.ACTION_VIEW);
-                        browserIntent.setData(Uri.parse(urlToCheck));
-                        startActivity(browserIntent);
-                        finish();
+                        launchURLInBrowser();
                     }
                 })
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
@@ -276,6 +273,14 @@ public class ScanActivity extends AppCompatActivity {
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         dialog.dismiss();
                         finish();
+                    }
+                })
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Prefs.putBoolean("ignoreNotInDbWarn", true);
+                        dialog.dismiss();
+                        launchURLInBrowser();
                     }
                 })
                 .build();
@@ -309,6 +314,8 @@ public class ScanActivity extends AppCompatActivity {
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         dialog.dismiss();
                         browserIntent.setAction(Intent.ACTION_VIEW);
+                        browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        browserIntent.setComponent(browserCompName);
                         browserIntent.setData(Uri.parse(virusTotalUrl));
                         startActivity(browserIntent);
                         finish();
@@ -318,10 +325,7 @@ public class ScanActivity extends AppCompatActivity {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         dialog.dismiss();
-                        browserIntent.setAction(Intent.ACTION_VIEW);
-                        browserIntent.setData(Uri.parse(urlToCheck));
-                        startActivity(browserIntent);
-                        finish();
+                        launchURLInBrowser();
                     }
                 })
                 .build();

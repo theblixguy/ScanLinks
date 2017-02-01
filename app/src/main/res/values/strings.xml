@@ -9,7 +9,7 @@
     <string name="url_not_in_db_warning_text">Suppress \'Link not in Database\' warning</string>
     <string name="app_about_title">ScanLinks app for Android</string>
     <string name="app_about_version">Version</string>
-    <string name="app_about_version_string">1.0.000.b</string>
+    <string name="app_about_version_string">1.1.000.b</string>
     <string name="app_about_text">ScanLinks allows you to block dangerous and unsafe websites on your device. Whenever you click on a link from another app, ScanLinks will check it if it\'s safe and will block the link from opening if it\'s not</string>
     <string name="app_about_open_source_text">ScanLinks for Android is made using great open source software:</string>
     <string name="licenses_text">licenses</string>
@@ -51,4 +51,5 @@
     <string name="main_menu_about_item_text">About</string>
     <string name="whitelist_menu_add_item_text">Add</string>
     <string name="whitelist_menu_remove_item_text">Remove</string>
+    <string name="url_not_in_db_neutral_text">Don\'t show again</string>
 </resources>
